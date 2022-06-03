@@ -28,10 +28,76 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../christopher-morgan-student-code/module-1/14_Unit_Testing/lecture" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../christopher-morgan-student-code/module-1/14_Unit_Testing/exercise" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="kitmorgan" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.OhHellTest.create_round_should_deal_3_cards_and_have_trump">
+    <configuration name="OhHellTest.create_round_should_deal_3_cards_and_have_trump" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CardGames" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OhHellTest" />
+      <option name="METHOD_NAME" value="create_round_should_deal_3_cards_and_have_trump" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OhHellTest.creates_a_list_of_3_players" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CardGames" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OhHellTest" />
+      <option name="METHOD_NAME" value="creates_a_list_of_3_players" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OhHellTest.should_throw_error_when_greater_than_7_players" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CardGames" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OhHellTest" />
+      <option name="METHOD_NAME" value="should_throw_error_when_greater_than_7_players" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OhHellTest.should_throw_error_when_less_than_3_players" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CardGames" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OhHellTest" />
+      <option name="METHOD_NAME" value="should_throw_error_when_less_than_3_players" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OhHellTest.should_throw_error_when_negative_players" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CardGames" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="OhHellTest" />
+      <option name="METHOD_NAME" value="should_throw_error_when_negative_players" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.OhHellTest.create_round_should_deal_3_cards_and_have_trump" />
+        <item itemvalue="JUnit.OhHellTest.should_throw_error_when_negative_players" />
+        <item itemvalue="JUnit.OhHellTest.should_throw_error_when_greater_than_7_players" />
+        <item itemvalue="JUnit.OhHellTest.should_throw_error_when_less_than_3_players" />
+        <item itemvalue="JUnit.OhHellTest.creates_a_list_of_3_players" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

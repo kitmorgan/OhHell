@@ -1,9 +1,6 @@
 package kitmorgan;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Player {
     String playerName;
@@ -173,4 +170,19 @@ public class Player {
     }
 
 
+    // @overide.equals and hashcode
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return seatNumber == player.seatNumber && playerName.equals(player.playerName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerName, seatNumber);
+    }
 }

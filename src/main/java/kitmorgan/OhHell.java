@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class OhHell {
-    Round round;
+    public List<Round> rounds = new ArrayList<>();
     public List<Player> players = new ArrayList<>();
     private final int numberOfPlayers;
     private final int numberOfRounds;
-    Card trump;
     Map<Integer, Integer> scoreboard = new HashMap<>();
 
     // numberOfPlayers should be >= 3 && <=7 throws IllegalArgumentException
@@ -36,7 +35,9 @@ public class OhHell {
         return numberOfRounds;
     }
 
-
+    public List<Round> getRounds() {
+        return rounds;
+    }
 
     // generate list of players
     // logic for betting
@@ -49,18 +50,8 @@ public class OhHell {
             scoreboard.put(i, 0);
         }
     }
-/** deals roundNumber of cards to each player, if drawTrump is true it will return a trump card else it will return null */
-    public Card deal(int roundNumber, boolean drawTrump){
-        Deck deck = new Deck();
-        for (int cardIndex = 0; cardIndex < roundNumber; cardIndex++){
-            for(Player player : players){
-                player.addCard(deck.cards.pop());
-            }
-        }
-        if(drawTrump){
-            return deck.cards.pop();
-        }else {
-            return null;
-        }
+
+    public Round createRound(int roundNumber, boolean hasTrump){
+        return new Round(players, roundNumber, true);
     }
 }
