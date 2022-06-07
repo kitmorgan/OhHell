@@ -95,37 +95,6 @@ public class Player {
         this.seatNumber = seatNumber;
     }
 
-
-//    public boolean setBid(int bid) {
-//        if (bid >= 0 && bid <= hand.size()){
-//            this.bid = bid;// the bid greater than or equal to zero; bid is not greater than cards dealt (round)
-//            return true;
-//        }
-//        return false;
-//    }
-//    public boolean setBidAsDealer(String bid, int anythingBut, boolean overbid, int round) {
-//        String checker ="";
-//        for (int i = 0; i <= round; i++){
-//            checker += i;
-//        }
-//        if (!checker.contains(bid) || bid.equalsIgnoreCase("")){
-//            return false;
-//        }
-//        int bidNum = Integer.parseInt(bid);
-//
-//        if (overbid == true){
-//            this.setBid(bidNum);
-//            return true;
-//        }else if (bidNum <= round && bidNum != anythingBut && bidNum >= 0){
-//            this.setBid(bidNum);
-//            return true;
-//        }else {
-//            return false;
-//        }
-//    }
-//public void resetBid(){
-//    this.bid = -1;
-//}
     public void setHand(List<Card> hand) {
         this.hand = hand;
     }

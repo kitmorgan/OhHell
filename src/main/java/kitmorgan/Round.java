@@ -6,21 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Round {
-    private Map<Player, Integer> bidMap = new HashMap<>();// Map<Player, roundInfo>
-    private Map<Player, Integer> trickTakenMap = new HashMap<>();
+    private Map<Player, RoundInfo> roundInfoMap =  new HashMap<>();
     private List<Player> players = new ArrayList<>();
     private final Card trump;
     private final boolean hasTrump;
     private final int roundNumber;
     public List<Trick> tricks;
 
-    public Map<Player, Integer> getBidMap() {
-        return bidMap;
-    }
-
-    public Map<Player, Integer> getTrickTakenMap() {
-        return trickTakenMap;
-    }
 
     public Card getTrump() {
         return trump;
@@ -39,8 +31,8 @@ public class Round {
         this.trump = deal(roundNumber, hasTrump);
         this.roundNumber = roundNumber;
         for (Player player : players){
-            bidMap.put(player, null);
-            trickTakenMap.put(player, 0);
+            RoundInfo roundInfo = new RoundInfo(0, 0);
+            roundInfoMap.put(player, roundInfo);
         }
     }
 
@@ -70,11 +62,12 @@ public class Round {
         if (player.isDealer()){
             int anythingBut = getInvalidDealerBid();
             if (bid != anythingBut && bid >= 0 && bid <=roundNumber){
-                bidMap.put(player, bid);
+                RoundInfo roundInfo = new RoundInfo(0, 0);
+                roundInfoMap.put(player, roundInfo);
             }
             else{ return false;}
         }else if (bid >= 0 && bid <= roundNumber){
-            bidMap.put(player, bid);
+            roundInfoMap.get(player).setBid(bid);
             return true;
         }
         return false;
@@ -85,17 +78,34 @@ public class Round {
         int bidSoFar = 0;
         for(Player player : players){
             if(!player.isDealer()){
-                bidSoFar += bidMap.get(player);
+                bidSoFar += roundInfoMap.get(player).getBid();
             }
         }
         return roundNumber - bidSoFar;
     }
 
-   // logic for playing card
-    // need to be able to know who played the card, add the card to playedCards
-    //
+    public void setDealer(Player dealer){
+        for (Player player : players){
+            if (player == dealer){
+                player.isDealer = true;
+            }
+            else{
+                player.isDealer = false;
+            }
+        }
+    }
+    // ohHell UI needs this
+//    public String getPlayers(){
+//        String answer = "[";
+//        for (int i = 0; i < players.size(); i++){
+//            answer += player.getPlayerName();
+//
+//        }
+//    }
 
-   // winning a trick
-   // winning points
+// for loop of tricks being created;
+    // adding tricks to roundInfo
+    // tallying score at the end of a round
+
 
 }

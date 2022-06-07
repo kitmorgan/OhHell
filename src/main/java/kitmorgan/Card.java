@@ -2,8 +2,8 @@ package kitmorgan;
 
 public class Card {
 
-    private Suits suit;
-    private Rank rank;
+    public Suits suit;
+    public Rank rank;
     private boolean faceDown = true;
 
     public Card(Suits suit, Rank rank) {
@@ -56,6 +56,7 @@ public class Card {
     public String toString() {
         return String.format("%s of %s", rank, suit);
     }
+
     public boolean isHigher(Card compare){
         if (this.rank.ordinal() > compare.rank.ordinal()){
             return true;

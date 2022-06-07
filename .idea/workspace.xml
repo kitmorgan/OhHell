@@ -28,7 +28,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../christopher-morgan-student-code/module-1/14_Unit_Testing/exercise" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../christopher-morgan-student-code/module-1/09_Classes_and_Encapsulation/lecture2" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -38,22 +38,25 @@
       <recent name="kitmorgan" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OhHellTest.create_round_should_deal_3_cards_and_have_trump">
+  <component name="RunManager" selected="Application.OhHellUserInterface">
+    <configuration name="OhHellUserInterface" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="kitmorgan.OhHellUserInterface" />
+      <module name="CardGames" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="kitmorgan.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="OhHellTest.create_round_should_deal_3_cards_and_have_trump" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CardGames" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="OhHellTest" />
       <option name="METHOD_NAME" value="create_round_should_deal_3_cards_and_have_trump" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OhHellTest.creates_a_list_of_3_players" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CardGames" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OhHellTest" />
-      <option name="METHOD_NAME" value="creates_a_list_of_3_players" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -69,16 +72,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OhHellTest.should_throw_error_when_less_than_3_players" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="CardGames" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="OhHellTest" />
-      <option name="METHOD_NAME" value="should_throw_error_when_less_than_3_players" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OhHellTest.should_throw_error_when_negative_players" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="CardGames" />
       <option name="PACKAGE_NAME" value="" />
@@ -89,13 +82,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RoundTest.round_has_players" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="CardGames" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="RoundTest" />
+      <option name="METHOD_NAME" value="round_has_players" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.OhHellUserInterface" />
+        <item itemvalue="JUnit.RoundTest.round_has_players" />
         <item itemvalue="JUnit.OhHellTest.create_round_should_deal_3_cards_and_have_trump" />
         <item itemvalue="JUnit.OhHellTest.should_throw_error_when_negative_players" />
         <item itemvalue="JUnit.OhHellTest.should_throw_error_when_greater_than_7_players" />
-        <item itemvalue="JUnit.OhHellTest.should_throw_error_when_less_than_3_players" />
-        <item itemvalue="JUnit.OhHellTest.creates_a_list_of_3_players" />
       </list>
     </recent_temporary>
   </component>
