@@ -17,8 +17,9 @@ public class Hand{
     }
     public String toString(){
         String  output = "";
+        int counter = 1;
         for (Card card : hand){
-            output += card.toString() + " ";
+            output += counter + ".) " + card.toString() + " ";
         }
         return output;
     }

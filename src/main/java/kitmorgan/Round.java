@@ -41,6 +41,7 @@ public class Round {
      */
     public Card deal(int roundNumber, boolean drawTrump) {
         Deck deck = new Deck();
+        deck.shuffle();
         for (int cardIndex = 0; cardIndex < roundNumber; cardIndex++) {
             for (Player player : players) {
                 player.addCard(deck.cards.pop());
@@ -68,9 +69,10 @@ public class Round {
             else{ return false;}
         }else if (bid >= 0 && bid <= roundNumber){
             roundInfoMap.get(player).setBid(bid);
-            return true;
+        }else{
+            return false;
         }
-        return false;
+        return true;
     }
 
     /** gets invalid bid for dealer */
@@ -94,18 +96,13 @@ public class Round {
             }
         }
     }
-    // ohHell UI needs this
-//    public String getPlayers(){
-//        String answer = "[";
-//        for (int i = 0; i < players.size(); i++){
-//            answer += player.getPlayerName();
-//
-//        }
-//    }
-
-// for loop of tricks being created;
-    // adding tricks to roundInfo
-    // tallying score at the end of a round
-
-
+    public int getBidSoFar() {
+        int bidSoFar = 0;
+        for (Player player : players) {
+            if (!player.isDealer()) {
+                bidSoFar += roundInfoMap.get(player).getBid();
+            }
+        }
+        return bidSoFar;
+    }
 }

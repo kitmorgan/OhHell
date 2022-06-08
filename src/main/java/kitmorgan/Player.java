@@ -3,15 +3,15 @@ package kitmorgan;
 import java.util.*;
 
 public class Player {
-    String playerName;
-    List<Card> hand = new ArrayList<>();
-    int playerId;
-    int chips;
-    int seatNumber;
-    boolean isPlaying = false;
-    boolean isUp = false;
-    boolean wonLastTrick = false;
-    boolean isDealer = false;
+    public String playerName;
+    public List<Card> hand = new ArrayList<>();
+    private int playerId;
+    private int chips;
+    public int seatNumber;
+    private boolean isPlaying = false;
+    private boolean isUp = false;
+    private boolean wonLastTrick = false;
+    public boolean isDealer = false;
 
     public Player(String playerName, int playerId, List<Card> hand, int chips, int seatNumber) {
         this.playerName = playerName;
@@ -138,10 +138,14 @@ public class Player {
         this.isDealer = isDealer;
     }
 
-
+    public String handToString(){
+        String output = "";
+        for(int i = 0; i < hand.size(); i++){
+            output += (i+1) + ".)" + hand.get(i).toString() + " ";
+        }
+        return output;
+    }
     // @overide.equals and hashcode
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -154,4 +158,5 @@ public class Player {
     public int hashCode() {
         return Objects.hash(playerName, seatNumber);
     }
+
 }

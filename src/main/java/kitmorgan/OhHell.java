@@ -49,9 +49,60 @@ public class OhHell {
             players.add(player);
             scoreboard.put(i, 0);
         }
+        players.get(numberOfPlayers - 1).isDealer = true;
+    }
+    public String toStringPlayers(){
+        String answer = "[";
+        for (int i = 0; i < players.size(); i++){
+            if (players.get(i).isDealer()){
+                answer += "*d*";
+            }
+            answer += players.get(i).getPlayerName();
+            if (i < players.size() - 1 ){
+                answer +=", ";
+            }
+        }
+        answer += "]";
+        return answer;
+    }
+    public String getDealer() throws Exception {
+        String answer = "No dealer";
+        for(Player player : players){
+            if (player.isDealer()){
+               answer = player.getPlayerName();
+            }
+        }
+        if (answer.equals("No dealer")){
+            throw new Exception ("No one to deal!");
+        }
+        return answer;
+    }
+
+    public String toStringFirstActor(){
+        int dealerPlusOne = -99;
+        for(int i = 0; i < players.size(); i++){
+            if (players.get(i).isDealer()){
+                dealerPlusOne = i+1;
+            }
+        }
+        int firstUp = dealerPlusOne % players.size();
+        return players.get(firstUp).getPlayerName();
+
+    }
+
+    public int getFirstActorIndex(){
+        int dealerPlusOne = -99;
+        for(int i = 0; i < players.size(); i++){
+            if (players.get(i).isDealer()){
+                dealerPlusOne = i+1;
+            }
+        }
+        int firstUp = dealerPlusOne % players.size();
+        return firstUp;
     }
 
     public Round createRound(int roundNumber, boolean hasTrump){
         return new Round(players, roundNumber, true);
     }
 }
+

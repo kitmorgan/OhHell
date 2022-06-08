@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8111be5-db44-471c-a055-7c3c02ed1978" name="Changes" comment="" />
+    <list default="true" id="f8111be5-db44-471c-a055-7c3c02ed1978" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/Hand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHellUserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHellUserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/Round.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/Hand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/Hand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/Round.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/Round.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +31,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -25,14 +42,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../christopher-morgan-student-code/module-1/09_Classes_and_Encapsulation/lecture2" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/workspace/OhHell"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="kitmorgan" />
@@ -41,7 +58,7 @@
   <component name="RunManager" selected="Application.OhHellUserInterface">
     <configuration name="OhHellUserInterface" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="kitmorgan.OhHellUserInterface" />
-      <module name="CardGames" />
+      <module name="OhHell" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="kitmorgan.*" />
@@ -112,5 +129,16 @@
       <updated>1654120597592</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
