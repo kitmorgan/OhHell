@@ -9,7 +9,7 @@ public class Trick {
 
 
     private Player winner;
-    private List<Player> players = new ArrayList<>();
+    public List<Player> players = new ArrayList<>();
     private Card trump;
     Card.Suits trumpSuit;
     private Map<Card, Player> cardsPlayed = new HashMap<>();
@@ -23,7 +23,8 @@ public class Trick {
         trumpSuit = trump.getSuit();
     }
 
-    public boolean playCard(Player player, Card card){
+    public boolean canCard(Player player, int cardIndex){
+        Card card = player.getHand().get(cardIndex);
         boolean canPlayTrump = true;
         boolean canPlayOtherSuit = true;
 
@@ -63,6 +64,12 @@ public class Trick {
         return false;
     }
 
+    // check to see if the card is playable using canPlay();
+    public void playCard(int playerIndex, int indexCard){
+        cardsPlayed.put(players.get(playerIndex).getHand().get(indexCard), players.get(playerIndex));
+        players.get(playerIndex).getHand().remove(indexCard);
+    }
+
     public Player getWinner(){
         return bestCard();
     }
@@ -92,6 +99,18 @@ public class Trick {
                 hasTrumpBeenPlayed = true;
             }
         }
+    }
+
+    public boolean hasTrumpBeenPlayed(){
+        return hasTrumpBeenPlayed;
+    }
+
+    public String playedCardsToString(){
+        String output = "";
+        for(Map.Entry<Card, Player> entry : cardsPlayed.entrySet()){
+            output += entry.getValue().toString();
+        }
+        return output;
     }
 
 }

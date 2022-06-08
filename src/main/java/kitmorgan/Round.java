@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Round {
-    private Map<Player, RoundInfo> roundInfoMap =  new HashMap<>();
+    public Map<Player, RoundInfo> roundInfoMap =  new HashMap<>();
     private List<Player> players = new ArrayList<>();
     private final Card trump;
     private final boolean hasTrump;
     private final int roundNumber;
-    public List<Trick> tricks;
+    public List<Trick> tricks = new ArrayList<>();
+    public boolean trumpPlayed;
 
 
     public Card getTrump() {
@@ -63,12 +64,15 @@ public class Round {
         if (player.isDealer()){
             int anythingBut = getInvalidDealerBid();
             if (bid != anythingBut && bid >= 0 && bid <=roundNumber){
-                RoundInfo roundInfo = new RoundInfo(0, 0);
+                RoundInfo roundInfo = roundInfoMap.get(player);
+                roundInfo.setBid(bid);
                 roundInfoMap.put(player, roundInfo);
             }
             else{ return false;}
         }else if (bid >= 0 && bid <= roundNumber){
-            roundInfoMap.get(player).setBid(bid);
+            RoundInfo roundInfo = roundInfoMap.get(player);
+            roundInfo.setBid(bid);
+            roundInfoMap.put(player, roundInfo);
         }else{
             return false;
         }
@@ -104,5 +108,57 @@ public class Round {
             }
         }
         return bidSoFar;
+    }
+
+    public void addTrick(Trick trick){
+        tricks.add(trick);
+    }
+    public boolean hasTrumpBeenPlayed(){
+        boolean output = false;
+        if(tricks.size() == 0){
+            return false;
+        }
+        for (Trick trick : tricks){
+            if (trick.hasTrumpBeenPlayed()){
+                output = true;
+            }
+        }
+        return output;
+    }
+
+    public int getUpThisTrickIndex(){
+        Player winnerLast = null;
+        int answer = -1;
+        if (tricks.size() == 0){
+            int index = findDealerIndex() + 1;
+            return index;
+        }
+        for (int i = 0; i < tricks.size(); i++){
+           winnerLast = tricks.get(i).getWinner();
+        }
+        for (int j  = 0; j < players.size(); j++){
+                if (winnerLast.equals(players.get(j))){
+                answer = j + 1;
+            }
+        }
+        return answer;
+    }
+
+    public Player findDealer(){
+        for (int i = 0; i < players.size(); i++){
+            if(players.get(i).isDealer()){
+                return players.get(i);
+            }
+        }
+        return null;
+    }
+
+    public int findDealerIndex(){
+        for (int i = 0; i < players.size(); i++){
+            if(players.get(i).isDealer()){
+                return i;
+            }
+        }
+        return -1;
     }
 }
