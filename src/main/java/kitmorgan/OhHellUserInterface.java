@@ -54,6 +54,7 @@ public class OhHellUserInterface {
             }
             // create a round
             round = ohHell.createRound(rn, hasTrump);
+            // ohHell should know what round and to create a round
             // deal
             System.out.printf(ohHell.getDealer() + " is dealing! Press enter to deal...");
             scanner.nextLine();

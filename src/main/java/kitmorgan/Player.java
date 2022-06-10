@@ -2,7 +2,7 @@ package kitmorgan;
 
 import java.util.*;
 
-public class Player {
+public class  Player {
     public String playerName;
     public List<Card> hand = new ArrayList<>();
     private int playerId;
