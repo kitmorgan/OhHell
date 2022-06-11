@@ -15,14 +15,34 @@ public class Trick {
     private Map<Card, Player> cardsPlayed = new HashMap<>();
     private boolean hasTrumpBeenPlayed = false;
     private Card firstCard;
+    private int trickNumber = 0;
+    private int cardsPlayedCounter = 0;
 
-    public Trick(List<Player> players, Card trump, Boolean hasTrumpBeenPlayed){
+    public Trick(List<Player> players, Card trump, int trickNumber, Boolean hasTrumpBeenPlayed){
         this.players = players;
         this.trump = trump;
         this.hasTrumpBeenPlayed = hasTrumpBeenPlayed;
         trumpSuit = trump.getSuit();
+        this.trickNumber = trickNumber;
     }
-
+    //v2
+    public boolean canPlayCard(Player player, int cardIndex){
+        Card card = player.getHand().get(cardIndex);
+        // special logic for first player
+        if(trickNumber == 0 && cardsPlayedCounter == 0){
+            boolean canPlayTrump = true;
+            for(Card cardEntry : player.getHand()){
+                if(cardEntry.getSuit() != trumpSuit){
+                    canPlayTrump = false;
+                }
+            }
+            if(card.getSuit() == trumpSuit && !canPlayTrump){
+                return false;
+            }
+        }
+        return false; //added so it will compile, check if you should change this.
+    }
+ // idk what this is doing
     public boolean canCard(Player player, int cardIndex){
         Card card = player.getHand().get(cardIndex);
         boolean canPlayTrump = true;
@@ -103,6 +123,7 @@ public class Trick {
     }
 
     public boolean hasTrumpBeenPlayed(){
+        setHasTrumpBeenPlayed();
         return hasTrumpBeenPlayed;
     }
 

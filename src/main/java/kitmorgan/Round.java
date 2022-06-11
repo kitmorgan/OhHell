@@ -15,6 +15,7 @@ public class Round {
     public boolean trumpPlayed;
     private boolean overBid = false;
     private boolean hasNextTrick = true;
+    public int trickNumber = tricks.size();
 
     Player dealer = null;
 
@@ -191,15 +192,9 @@ public class Round {
         return -1;
     }
 
-    public void resetHasActed(){
-        for (Player player : players){
-            player.hasActed = false;
-        }
-    }
 
     public Trick createTrick() {
-        Trick trick = new Trick(players, getTrump(), hasTrumpBeenPlayed());
-        resetHasActed();
+        Trick trick = new Trick(players, getTrump(), trickNumber, hasTrumpBeenPlayed());
         return trick;
     }
 
