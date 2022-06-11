@@ -44,14 +44,12 @@ public class OhHellUserInterface {
         wipe();
         write("Input accepted, starting game for: ");
         write(ohHell.toStringPlayers());
-        // start the game, for loop creating rounds
-        // while(ohHell.hasNextRound()
         while(ohHell.hasNextRound()) {
             // create a round
             round = ohHell.createRound();
             // ohHell should know what round and to create a round (DONE)
             // deal
-            System.out.printf(ohHell.getDealer() + " is dealing! Press enter to deal...");
+            System.out.printf(ohHell.getDealerName() + " is dealing! Press enter to deal...");
             scanner.nextLine();
             write("");
             write("READ ME: '" + round.getTrump().toString() + " is the trump card, lets start bidding.");

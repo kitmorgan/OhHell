@@ -14,6 +14,7 @@ public class OhHell {
     public int roundNumber = 1;
     public boolean trumpThisRound = true;
 
+    public int dealerIndex = 0;
 
     // numberOfPlayers should be >= 3 && <=7 throws IllegalArgumentException
     public OhHell(int numberOfPlayers, int numberOfRounds) {
@@ -107,7 +108,7 @@ public class OhHell {
         int firstUp = dealerPlusOne % players.size();
         return firstUp;
     }
-    public String getDealer() throws Exception {
+    public String getDealerName() throws Exception {
         String answer = "No dealer";
         for (Player player : players) {
             if (player.isDealer()) {
@@ -154,11 +155,12 @@ public class OhHell {
 
     public void nextRound() {
         this.roundNumber++;
-
+        dealerIndex++;
     }
 
     public Round createRound() {
-        return new Round(players, this.roundNumber, trumpThisRound);
+        int modDealerIndex = (dealerIndex + 1) % numberOfPlayers;
+        return new Round(players, this.roundNumber, modDealerIndex, trumpThisRound);
     }
     /** Game order:
      * initialize OhHell

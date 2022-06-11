@@ -16,6 +16,10 @@ public class Round {
     private boolean overBid = false;
     private boolean hasNextTrick = true;
 
+    Player dealer = null;
+
+    int currentPlayerIndex = 0; //(getUpFirstThisTrickIndex() + 1) % players.size();
+
 
     public Card getTrump() {
         return trump;
@@ -28,11 +32,12 @@ public class Round {
     /**
      * initializes a round, taking a list of players, the roundNumber and a boolean to draw or not draw trump
      */
-    public Round(List<Player> players, int roundNumber, boolean hasTrump) {
+    public Round(List<Player> players, int roundNumber, int modDealerIndex, boolean hasTrump) {
         this.players = players;
         this.hasTrump = hasTrump;
         this.trump = deal(roundNumber, hasTrump);
         this.roundNumber = roundNumber;
+        this.dealer = players.get(modDealerIndex);
         for (Player player : players) {
             RoundInfo roundInfo = new RoundInfo(0, 0);
             roundInfoMap.put(player, roundInfo);
@@ -56,8 +61,6 @@ public class Round {
             return null;
         }
     }
-// should a round have a map to keep track of what players bid, or is there a better way to keep track
-    // same with tricks taken '
 
     /**
      * sets bid for one player, returns false if the bid was not valid;
@@ -141,7 +144,7 @@ public class Round {
         return output;
     }
 
-    public int getUpThisTrickIndex() {
+    public int getUpFirstThisTrickIndex() {
         Player winnerLast = null;
         int answer = -1;
         if (tricks.size() == 0) {
@@ -158,6 +161,8 @@ public class Round {
         }
         return answer;
     }
+
+
 
     public Player findDealer() {
         for (int i = 0; i < players.size(); i++) {
@@ -197,4 +202,5 @@ public class Round {
         resetHasActed();
         return trick;
     }
+
 }

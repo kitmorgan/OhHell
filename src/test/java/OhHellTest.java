@@ -37,8 +37,8 @@ public class OhHellTest {
     @Test
     public void create_round_should_deal_3_cards_and_have_trump(){
         OhHell ohHell = new OhHell(3);
-        Round round = ohHell.createRound(3, true);
-        Round testRound = new Round(ohHell.players, 3, true);
+        Round round = ohHell.createRound();
+        Round testRound = new Round(ohHell.players, 3, 0, true);
 
         Assert.assertTrue("Rounds should be the same", testRound.getPlayers() == round.getPlayers());
     }
