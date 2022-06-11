@@ -65,9 +65,10 @@ public class Trick {
     }
 
     // check to see if the card is playable using canPlay();
-    public void playCard(int playerIndex, int indexCard){
-        cardsPlayed.put(players.get(playerIndex).getHand().get(indexCard), players.get(playerIndex));
-        players.get(playerIndex).getHand().remove(indexCard);
+    public void playCard(Player player, int indexCard){
+        cardsPlayed.put(player.getHand().get(indexCard), player);
+        player.getHand().remove(indexCard);
+        player.hasActed(true);
     }
 
     public Player getWinner(){

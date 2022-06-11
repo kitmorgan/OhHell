@@ -12,6 +12,12 @@ public class  Player {
     private boolean isUp = false;
     private boolean wonLastTrick = false;
     public boolean isDealer = false;
+    public boolean hasActed = false;
+
+
+    public void hasActed(boolean actedTrue) {
+        this.hasActed = hasActed;
+    }
 
     public Player(String playerName, int playerId, List<Card> hand, int chips, int seatNumber) {
         this.playerName = playerName;

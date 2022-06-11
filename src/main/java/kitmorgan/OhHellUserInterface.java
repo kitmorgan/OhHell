@@ -42,19 +42,14 @@ public class OhHellUserInterface {
             }
         }
         wipe();
-        write("Input accepted, starting game for:");
+        write("Input accepted, starting game for: ");
         write(ohHell.toStringPlayers());
         // start the game, for loop creating rounds
-        for (int rn = 1; rn < ohHell.getNumberOfRounds(); rn++) {
-            Boolean hasTrump = true;
-            if (rn < ohHell.getNumberOfRounds() - 1) {
-                hasTrump = true;
-            } else {
-                hasTrump = false;
-            }
+        // while(ohHell.hasNextRound()
+        while(ohHell.hasNextRound()) {
             // create a round
-            round = ohHell.createRound(rn, hasTrump);
-            // ohHell should know what round and to create a round
+            round = ohHell.createRound();
+            // ohHell should know what round and to create a round (DONE)
             // deal
             System.out.printf(ohHell.getDealer() + " is dealing! Press enter to deal...");
             scanner.nextLine();
@@ -65,25 +60,26 @@ public class OhHellUserInterface {
             write("press enter when ready (hand will be exposed)");
             scanner.nextLine();
             wipe();
-            for (int bidIndex = 0; bidIndex < ohHell.getNumberOfPlayers(); bidIndex++) {
-                int upNow = (ohHell.getFirstActorIndex() + bidIndex) % ohHell.getNumberOfPlayers();
+            // another while loop here? could do last while(ohHell.hasNextToAct){ players.getplayer(ohHell.upNow)
+            while(ohHell.hasNextToAct()){
                 write("Trump: " + round.getTrump().toString());
                 write("Current bid is at: " + round.getBidSoFar());
-                write(round.getPlayers().get(upNow).handToString());
-                if (round.getPlayers().get(upNow).isDealer()) {
-                    if (round.getInvalidDealerBid() <= -1) {
+                write("Your hand" + ohHell.getUpNow().handToString());
+                if (ohHell.getUpNow().isDealer()) {
+                    if (round.isOverBid()) {
                         write("Alright dealer we're overbid, lucky you.");
                     } else {
                         System.out.println("Dealer is up, you can't bid: " + round.getInvalidDealerBid());
                     }
                 }
                 while (true) {
-                    System.out.printf("%s, enter your bid: ", round.getPlayers().get(upNow).getPlayerName());
+                    System.out.printf("%s, enter your bid: ", ohHell.getUpNow().getPlayerName());
                     String bid = scanner.nextLine();
                     try {
-                        boolean accepted = round.setBid(Integer.parseInt(bid), round.getPlayers().get(upNow));
+                        boolean accepted = round.setBid(Integer.parseInt(bid), ohHell.getUpNow()) ;
                         if (accepted) {
                             wipe();
+                            //what if every time the bid (setBid) has acted = true;
                             break;
                         } else {
                             write("Enter a valid bid you cheater");
@@ -93,25 +89,25 @@ public class OhHellUserInterface {
                     }
                 }
             }
+            // bids set, now for the tricks
                 wipe();
                 write("Bids are set, lets play. Pass the computer to your left....");
                 scanner.nextLine();
                 // play
-                for (int trickIndex = 0; trickIndex < rn; trickIndex++){
-                    trick = new Trick(round.getPlayers(), round.getTrump(), round.hasTrumpBeenPlayed());
-                    for (int i = 0; i < ohHell.getNumberOfPlayers(); i++){
-                        int realPlayerIndex = (round.getUpThisTrickIndex() + trickIndex) % ohHell.getNumberOfPlayers();
+                while(round.hasNextTrick()){ //just added this 9:57 6/10/22
+                    round.createTrick();
+                    while(ohHell.hasNextToAct()){
                         write("Trump: " + round.getTrump().toString());
-                        write("Your bid: " + round.roundInfoMap.get(round.getPlayers().get(realPlayerIndex)).getBid());
-                        write(trick.players.get(realPlayerIndex).getPlayerName() + "'s hand:" + trick.players.get(realPlayerIndex).handToString());
+                        write("Your bid: " + round.roundInfoMap.get(ohHell.getUpNow()).getBid());
+                        write(ohHell.getUpNow().getPlayerName() + "'s hand:" + ohHell.getUpNow().handToString());
                         while(true) {
                             write("Play a card (#): ");
                             String input = scanner.nextLine();
                             try {
                                 int cardIndex = Integer.parseInt(input) - 1;
-                                boolean valid = trick.canCard(trick.players.get(realPlayerIndex), cardIndex);
+                                boolean valid = trick.canCard(ohHell.getUpNow(), cardIndex);
                                 if (valid) {
-                                    trick.playCard(realPlayerIndex, cardIndex);
+                                    trick.playCard(ohHell.getUpNow(), cardIndex);
                                     break;
                                 }
                             } catch (Exception e) {
