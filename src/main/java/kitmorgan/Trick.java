@@ -1,5 +1,6 @@
 package kitmorgan;
 
+import java.nio.channels.IllegalSelectorException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,11 +13,13 @@ public class Trick {
     public List<Player> players = new ArrayList<>();
     private Card trump;
     Card.Suits trumpSuit;
-    private Map<Card, Player> cardsPlayed = new HashMap<>();
+    public Map<Card, Player> cardsPlayed = new HashMap<>();
     private boolean hasTrumpBeenPlayed = false;
     private Card firstCard;
     private int trickNumber = 0;
     private int cardsPlayedCounter = 0;
+
+    private Card.Suits firstSuitPlayed;
 
     public Trick(List<Player> players, Card trump, int trickNumber, Boolean hasTrumpBeenPlayed){
         this.players = players;
@@ -25,7 +28,7 @@ public class Trick {
         trumpSuit = trump.getSuit();
         this.trickNumber = trickNumber;
     }
-    //v2
+    //v2 -- is the card legal?
     public boolean canPlayCard(Player player, int cardIndex){
         Card card = player.getHand().get(cardIndex);
         // special logic for first player
@@ -38,64 +41,41 @@ public class Trick {
             }
             if(card.getSuit() == trumpSuit && !canPlayTrump){
                 return false;
+            }else{
+                return true;
             }
-        }
-        return false; //added so it will compile, check if you should change this.
-    }
- // idk what this is doing
-    public boolean canCard(Player player, int cardIndex){
-        Card card = player.getHand().get(cardIndex);
-        boolean canPlayTrump = true;
-        boolean canPlayOtherSuit = true;
-
-        Card.Suits mandatorySuit = trump.getSuit();
-        // first player can play any card except trump, unless trump has been played.
-        for(Card cardInHand: player.hand){
-            // does the hand contain non-trump cards
-            if (cardInHand.getSuit() != trumpSuit){
-                canPlayTrump = false;
-            }
-            // does the hand contain the suit of first card played
-            if (!cardsPlayed.isEmpty()){
-                if(cardInHand.getSuit() == mandatorySuit){
-                    canPlayOtherSuit = false;
-                    break;
+            //rules for those after the first player
+        }else{
+            boolean mustPlayFirstSuit = false;
+            //check if they have the firstSuitPlayed
+            for(Card cardEntry : player.getHand()){
+                if(cardEntry.getSuit() == firstSuitPlayed){
+                    mustPlayFirstSuit = true;
                 }
             }
-        }
-        if (cardsPlayed.isEmpty()){
-            // is the card a trump card?
-            if (hasTrumpBeenPlayed || canPlayTrump){
-                cardsPlayed.put(card, player);
-                setHasTrumpBeenPlayed();
-                firstCard = card;
-                mandatorySuit = card.getSuit();
-
-            } else return  false;
-        }else{
-            // does the player have the mandatory suit?
-            if(canPlayOtherSuit){
-                cardsPlayed.put(card, player);
-                setHasTrumpBeenPlayed();
-            }else if(card.getSuit() != mandatorySuit){
-                return false;
+            if(mustPlayFirstSuit && card.getSuit()==firstSuitPlayed){
+                return true;
+            }else if(!mustPlayFirstSuit){
+                return true;
             }
         }
         return false;
     }
-
     // check to see if the card is playable using canPlay();
     public void playCard(Player player, int indexCard){
-        cardsPlayed.put(player.getHand().get(indexCard), player);
+        if(!canPlayCard(player, indexCard)){
+            throw new IllegalArgumentException ("card not valid");
+        }
+        Card card = player.getHand().get(indexCard);
+        cardsPlayed.put(card, player);
         player.getHand().remove(indexCard);
-        player.hasActed(true);
+        if(cardsPlayedCounter == 0){
+            firstSuitPlayed = card.getSuit();
+        }
+        cardsPlayedCounter++;
     }
 
-    public Player getWinner(){
-        return bestCard();
-    }
-
-    public Player bestCard() {
+    public Player getWinner() {
         Card bestCard = firstCard;
         // picking strongest suit
         if(trump != null) {

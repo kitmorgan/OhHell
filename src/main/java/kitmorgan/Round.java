@@ -7,17 +7,30 @@ import java.util.Map;
 
 public class Round {
     public Map<Player, RoundInfo> roundInfoMap = new HashMap<>();
+
     private List<Player> players = new ArrayList<>();
+
     private final Card trump;
+
     private final boolean hasTrump;
+
     private final int roundNumber;
+
     public List<Trick> tricks = new ArrayList<>();
+
     public boolean trumpPlayed;
+
     private boolean overBid = false;
+
     private boolean hasNextTrick = true;
+
     public int trickNumber = tricks.size();
 
-    Player dealer = null;
+    public int bidsTaken = 0;
+
+    Player dealer;
+
+    public int modDealerIndex;
 
     int currentPlayerIndex = 0; //(getUpFirstThisTrickIndex() + 1) % players.size();
 
@@ -39,6 +52,7 @@ public class Round {
         this.trump = deal(roundNumber, hasTrump);
         this.roundNumber = roundNumber;
         this.dealer = players.get(modDealerIndex);
+        this.modDealerIndex = modDealerIndex;
         for (Player player : players) {
             RoundInfo roundInfo = new RoundInfo(0, 0);
             roundInfoMap.put(player, roundInfo);
@@ -67,13 +81,13 @@ public class Round {
      * sets bid for one player, returns false if the bid was not valid;
      */
     public boolean setBid(int bid, Player player) {
-        if (player.isDealer()) {
+        if (isDealer(player)) {
             int anythingBut = getInvalidDealerBid();
             if (bid != anythingBut && bid >= 0 && bid <= roundNumber) {
                 RoundInfo roundInfo = roundInfoMap.get(player);
                 roundInfo.setBid(bid);
                 roundInfoMap.put(player, roundInfo);
-                player.hasActed = true;
+                bidsTaken++;
             } else {
                 return false;
             }
@@ -81,7 +95,7 @@ public class Round {
             RoundInfo roundInfo = roundInfoMap.get(player);
             roundInfo.setBid(bid);
             roundInfoMap.put(player, roundInfo);
-            player.hasActed = true;
+            bidsTaken++;
         } else {
             return false;
         }
@@ -94,22 +108,13 @@ public class Round {
     public int getInvalidDealerBid() {
         int bidSoFar = 0;
         for (Player player : players) {
-            if (!player.isDealer()) {
+            if (!player.isDealer()) { //TODO: Change like above;
                 bidSoFar += roundInfoMap.get(player).getBid();
             }
         }
         return roundNumber - bidSoFar;
     }
 
-    public void setDealer(Player dealer) {
-        for (Player player : players) {
-            if (player == dealer) {
-                player.isDealer = true;
-            } else {
-                player.isDealer = false;
-            }
-        }
-    }
 
     public int getBidSoFar() {
         int bidSoFar = 0;
@@ -144,12 +149,12 @@ public class Round {
         }
         return output;
     }
-
+// TODO: TEST ME!
     public int getUpFirstThisTrickIndex() {
         Player winnerLast = null;
         int answer = -1;
-        if (tricks.size() == 0) {
-            int index = findDealerIndex() + 1;
+        if (trickNumber == 0) {
+            int index = (modDealerIndex + 1) % players.size();
             return index;
         }
         for (int i = 0; i < tricks.size(); i++) {
@@ -157,7 +162,7 @@ public class Round {
         }
         for (int j = 0; j < players.size(); j++) {
             if (winnerLast.equals(players.get(j))) {
-                answer = j + 1;
+                answer = j;
             }
         }
         return answer;
@@ -165,14 +170,10 @@ public class Round {
 
 
 
-    public Player findDealer() {
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).isDealer()) {
-                return players.get(i);
-            }
-        }
-        return null;
+    public boolean isDealer(Player player ){
+        return (player == dealer);
     }
+
     public boolean hasNextTrick(){
         if(tricks.size() < roundNumber - 1){
             hasNextTrick = true;
@@ -183,19 +184,20 @@ public class Round {
         }
     }
 
-    public int findDealerIndex() {
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).isDealer()) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
 
     public Trick createTrick() {
         Trick trick = new Trick(players, getTrump(), trickNumber, hasTrumpBeenPlayed());
         return trick;
+    }
+
+    public void endTrick(Trick trick) throws Exception{
+        if(trick.cardsPlayed.size() == players.size()){
+            trick.getWinner();
+            addTrick(trick);
+        }else {
+            throw new Exception("THE TRICK IS NOT OVER UNTIL ALL PLAYERS HAVE PLAYED: " + trick.cardsPlayed.size() + "!=" + players.size());
+        }
+
     }
 
 }

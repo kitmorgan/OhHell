@@ -9,10 +9,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHellUserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHellUserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/Round.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/OhHellTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/OhHellTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/Trick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/Trick.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/Round.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/Round.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,10 +44,10 @@
       <recent name="kitmorgan" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OhHellTest.create_round_should_deal_3_cards_and_have_trump (1)">
+  <component name="RunManager" selected="Application.OhHellUserInterface">
     <configuration name="OhHellUserInterface" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="kitmorgan.OhHellUserInterface" />
-      <module name="CardGames" />
+      <module name="OhHell" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="kitmorgan.*" />
@@ -102,8 +100,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.OhHellTest.create_round_should_deal_3_cards_and_have_trump (1)" />
         <item itemvalue="Application.OhHellUserInterface" />
+        <item itemvalue="JUnit.OhHellTest.create_round_should_deal_3_cards_and_have_trump (1)" />
         <item itemvalue="JUnit.RoundTest.round_has_players" />
         <item itemvalue="JUnit.OhHellTest.create_round_should_deal_3_cards_and_have_trump" />
         <item itemvalue="JUnit.OhHellTest.should_throw_error_when_negative_players" />
@@ -131,16 +129,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/kitmorgan/OhHellUserInterface.java</url>
-          <line>133</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

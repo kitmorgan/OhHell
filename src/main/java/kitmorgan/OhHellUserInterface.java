@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class OhHellUserInterface {
+    //Colors
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_RED = "\u001B[31m";
+
     public static void main(String[] args) throws Exception {
         OhHell ohHell = null;
         Round round = null;
@@ -44,7 +49,7 @@ public class OhHellUserInterface {
         wipe();
         write("Input accepted, starting game for: ");
         write(ohHell.toStringPlayers());
-        while(ohHell.hasNextRound()) {
+        while (ohHell.hasNextRound()) {
             // create a round
             round = ohHell.createRound();
             // ohHell should know what round and to create a round (DONE)
@@ -52,17 +57,18 @@ public class OhHellUserInterface {
             System.out.printf(ohHell.getDealerName() + " is dealing! Press enter to deal...");
             scanner.nextLine();
             write("");
-            write("READ ME: '" + round.getTrump().toString() + " is the trump card, lets start bidding.");
+            write("READ ME: '" + ANSI_RED + round.getTrump().toString() + " is the trump card" + ANSI_RESET + ", lets start bidding.");
 
             System.out.printf("%s is the first to bid', pass the computer to them.\n", ohHell.toStringFirstActor());
             write("press enter when ready (hand will be exposed)");
             scanner.nextLine();
             wipe();
-            // another while loop here? could do last while(ohHell.hasNextToAct){ players.getplayer(ohHell.upNow)
-            while(ohHell.hasNextToAct()){
+            // works
+            while (ohHell.hasNextToAct()) {
+                write(ANSI_GREEN + ohHell.getUpNow().getPlayerName() + "'s Turn" + ANSI_RESET);
                 write("Trump: " + round.getTrump().toString());
                 write("Current bid is at: " + round.getBidSoFar());
-                write("Your hand" + ohHell.getUpNow().handToString());
+                write("Your hand: " + ohHell.getUpNow().handToString());
                 if (ohHell.getUpNow().isDealer()) {
                     if (round.isOverBid()) {
                         write("Alright dealer we're overbid, lucky you.");
@@ -74,8 +80,7 @@ public class OhHellUserInterface {
                     System.out.printf("%s, enter your bid: ", ohHell.getUpNow().getPlayerName());
                     String bid = scanner.nextLine();
                     try {
-                        boolean accepted = round.setBid(Integer.parseInt(bid), ohHell.getUpNow()) ;
-                        if (accepted) {
+                        if (round.setBid(Integer.parseInt(bid), ohHell.getUpNow())){
                             wipe();
                             //what if every time the bid (setBid) has acted = true;
                             break;
@@ -88,38 +93,33 @@ public class OhHellUserInterface {
                 }
             }
             // bids set, now for the tricks
-                wipe();
-                write("Bids are set, lets play. Pass the computer to your left....");
-                scanner.nextLine();
-                // play
-                while(round.hasNextTrick()){ //just added this 9:57 6/10/22
-                    round.createTrick();
-                    while(ohHell.hasNextToAct()){
-                        write("Trump: " + round.getTrump().toString());
-                        write("Your bid: " + round.roundInfoMap.get(ohHell.getUpNow()).getBid());
-                        write(ohHell.getUpNow().getPlayerName() + "'s hand:" + ohHell.getUpNow().handToString());
-                        while(true) {
-                            write("Play a card (#): ");
-                            String input = scanner.nextLine();
-                            try {
-                                int cardIndex = Integer.parseInt(input) - 1;
-                                boolean valid = trick.canCard(ohHell.getUpNow(), cardIndex);
-                                if (valid) {
-                                    trick.playCard(ohHell.getUpNow(), cardIndex);
-                                    break;
-                                }
-                            } catch (Exception e) {
-                                write("Enter a valid card number.");
-                            }
-                            write("invalid input");
+            wipe();
+            write("Bids are set, lets play. Pass the computer to your left....");
+            scanner.nextLine();
+            // play
+            while (round.hasNextTrick()) { //just added this 9:57 6/10/22
+                round.createTrick();
+                while (ohHell.hasNextToAct()) {
+                    write("Trump: " + round.getTrump().toString());
+                    write("Your bid: " + round.roundInfoMap.get(ohHell.getUpNow()).getBid());
+                    write(ohHell.getUpNow().getPlayerName() + "'s hand:" + ohHell.getUpNow().handToString());
+                    while (true) {
+                        write("Play a card (#): ");
+                        String input = scanner.nextLine();
+                        try {
+                            trick.playCard(ohHell.getUpNow(), Integer.parseInt(input) - 1);
+                            break;
+                        } catch (Exception e) {
+                            write("Enter a valid card number.");
                         }
-                        wipe();
-                        write(trick.playedCardsToString());
                     }
+                    wipe();
+                    write(trick.playedCardsToString());
                 }
             }
-
         }
+
+    }
 
 
     public static void write(String message) {
@@ -135,18 +135,18 @@ public class OhHellUserInterface {
     }
 
     // show them the hand, ask them to pick a card, put that in trick.playCard();
-    public int pickACard(){
-    Scanner scanner = new Scanner(System.in);
-    int input = -1;
-    while (true){
-        write("pick a card (#): ");
-    try {
-        input = Integer.parseInt(scanner.nextLine());
-        break;
-    }catch (NumberFormatException nfe){
-        write("write a valid number");
-    }
-    }
+    public int pickACard() {
+        Scanner scanner = new Scanner(System.in);
+        int input = -1;
+        while (true) {
+            write("pick a card (#): ");
+            try {
+                input = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException nfe) {
+                write("write a valid number");
+            }
+        }
         return input;
     }
 

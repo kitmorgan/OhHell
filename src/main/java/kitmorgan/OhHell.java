@@ -16,6 +16,7 @@ public class OhHell {
 
     public int dealerIndex = 0;
 
+
     // numberOfPlayers should be >= 3 && <=7 throws IllegalArgumentException
     public OhHell(int numberOfPlayers, int numberOfRounds) {
         if (numberOfPlayers < 3 || numberOfPlayers > 7) {
@@ -89,6 +90,7 @@ public class OhHell {
     }
 
     // iterate through players if hasActed = true
+    // needs rework
     public boolean hasNextToAct() {
         for (Player player : players) {
             if (!player.hasActed) {
