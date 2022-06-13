@@ -1,10 +1,7 @@
 package kitmorgan;
 
 import java.lang.invoke.WrongMethodTypeException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class OhHellUserInterface {
     //Colors
@@ -37,7 +34,7 @@ public class OhHellUserInterface {
                 String name = scanner.nextLine();
                 if (enteredNames.contains(name)) {
                     write("Enter a unique name");
-                } else if (player.playerName.length() != 0 && player.playerName.length() <= 15) {
+                } else if (player.playerName.length() >= 1 && player.playerName.length() <= 15) {
                     player.playerName = name;
                     enteredNames.add(name);
                     break;
@@ -48,18 +45,17 @@ public class OhHellUserInterface {
         }
         wipe();
         write("Input accepted, starting game for: ");
-        write(ohHell.toStringPlayers());
-        while (ohHell.hasNextRound()) {
+        write(toStringPlayers(ohHell));
+        do{ //do as long as a round will be created.
             // create a round
             round = ohHell.createRound();
-            // ohHell should know what round and to create a round (DONE)
-            // deal
-            System.out.printf(ohHell.getDealerName() + " is dealing! Press enter to deal...");
+
+            System.out.printf(round.dealer.getPlayerName() + " is dealing! Press enter to deal...");
             scanner.nextLine();
             write("");
             write("READ ME: '" + ANSI_RED + round.getTrump().toString() + " is the trump card" + ANSI_RESET + ", lets start bidding.");
 
-            System.out.printf("%s is the first to bid', pass the computer to them.\n", ohHell.toStringFirstActor());
+            System.out.printf("%s is the first to bid', pass the computer to them.\n", ohHell.players.get((ohHell.dealerIndex + 1) % (ohHell.getNumberOfPlayers() - 1)).playerName);
             write("press enter when ready (hand will be exposed)");
             scanner.nextLine();
             wipe();
@@ -97,9 +93,11 @@ public class OhHellUserInterface {
             write("Bids are set, lets play. Pass the computer to your left....");
             scanner.nextLine();
             // play
-            while (round.hasNextTrick()) { //just added this 9:57 6/10/22
+            //TODO: need to rework the logic and counter
+            do{
+             //just added this 9:57 6/10/22
                 round.createTrick();
-                while (ohHell.hasNextToAct()) {
+                while (ohHell.hasNextToAct()) {  //TODO: while(trick.hasNext)
                     write("Trump: " + round.getTrump().toString());
                     write("Your bid: " + round.roundInfoMap.get(ohHell.getUpNow()).getBid());
                     write(ohHell.getUpNow().getPlayerName() + "'s hand:" + ohHell.getUpNow().handToString());
@@ -116,8 +114,9 @@ public class OhHellUserInterface {
                     wipe();
                     write(trick.playedCardsToString());
                 }
-            }
-        }
+            }while (round.hasNextTrick());
+            //round over, score tallied
+        }while (ohHell.hasNextRound());
 
     }
 
@@ -150,6 +149,17 @@ public class OhHellUserInterface {
         return input;
     }
 
-    //
-
+    public static String toStringPlayers(OhHell ohHell) {
+        StringBuilder answer = new StringBuilder("[");
+        int counter = 1;
+        for (Player player : ohHell.players) {
+            answer.append(player.getPlayerName());
+            if (counter < ohHell.getNumberOfPlayers()) {
+                answer.append(", ");
+            }
+            counter++;
+        }
+        answer.append("]");
+        return answer.toString();
+    }
 }

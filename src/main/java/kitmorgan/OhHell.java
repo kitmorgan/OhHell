@@ -13,7 +13,6 @@ public class OhHell {
     Map<Integer, Integer> scoreboard = new HashMap<>();
     public int roundNumber = 1;
     public boolean trumpThisRound = true;
-
     public int dealerIndex = 0;
 
 
@@ -60,20 +59,6 @@ public class OhHell {
         players.get(numberOfPlayers - 1).isDealer = true;
     }
 
-    public String toStringPlayers() {
-        String answer = "[";
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).isDealer()) {
-                answer += "*d*";
-            }
-            answer += players.get(i).getPlayerName();
-            if (i < players.size() - 1) {
-                answer += ", ";
-            }
-        }
-        answer += "]";
-        return answer;
-    }
 
 
     // controls when/if there is a no trump round
@@ -135,18 +120,6 @@ public class OhHell {
         return isUp;
     }
 
-    public String toStringFirstActor() {
-        int dealerPlusOne = -99;
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).isDealer()) {
-                dealerPlusOne = i + 1;
-            }
-        }
-        int firstUp = dealerPlusOne % players.size();
-        return players.get(firstUp).getPlayerName();
-
-    }
-
     public boolean hasNextRound() {
         if (rounds.size() < numberOfRounds) {
             return true;
@@ -161,7 +134,7 @@ public class OhHell {
     }
 
     public Round createRound() {
-        int modDealerIndex = (dealerIndex + 1) % numberOfPlayers;
+        int modDealerIndex = (dealerIndex) % (numberOfPlayers - 1);
         return new Round(players, this.roundNumber, modDealerIndex, trumpThisRound);
     }
     /** Game order:
