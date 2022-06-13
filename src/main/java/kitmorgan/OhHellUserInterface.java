@@ -60,12 +60,12 @@ public class OhHellUserInterface {
             scanner.nextLine();
             wipe();
             // works
-            while (ohHell.hasNextToAct()) {
-                write(ANSI_GREEN + ohHell.getUpNow().getPlayerName() + "'s Turn" + ANSI_RESET);
+            while (round.hasNextBidder()) { // TODO: DO WHILE
+                write(ANSI_GREEN + round.upNow().getPlayerName() + "'s Turn" + ANSI_RESET);
                 write("Trump: " + round.getTrump().toString());
                 write("Current bid is at: " + round.getBidSoFar());
-                write("Your hand: " + ohHell.getUpNow().handToString());
-                if (ohHell.getUpNow().isDealer()) {
+                write("Your hand: " + round.upNow().handToString());
+                if (round.isDealer(round.upNow())) {
                     if (round.isOverBid()) {
                         write("Alright dealer we're overbid, lucky you.");
                     } else {
@@ -73,12 +73,11 @@ public class OhHellUserInterface {
                     }
                 }
                 while (true) {
-                    System.out.printf("%s, enter your bid: ", ohHell.getUpNow().getPlayerName());
+                    System.out.printf("%s, enter your bid: ", round.upNow().getPlayerName());
                     String bid = scanner.nextLine();
                     try {
-                        if (round.setBid(Integer.parseInt(bid), ohHell.getUpNow())){
+                        if (round.setBid(Integer.parseInt(bid), round.upNow())){
                             wipe();
-                            //what if every time the bid (setBid) has acted = true;
                             break;
                         } else {
                             write("Enter a valid bid you cheater");
@@ -90,34 +89,38 @@ public class OhHellUserInterface {
             }
             // bids set, now for the tricks
             wipe();
-            write("Bids are set, lets play. Pass the computer to your left....");
+            write("Bids are set, lets play! Pass the computer to your left....");
             scanner.nextLine();
             // play
+
             //TODO: need to rework the logic and counter
             do{
              //just added this 9:57 6/10/22
                 round.createTrick();
-                while (ohHell.hasNextToAct()) {  //TODO: while(trick.hasNext)
+                do {
+                    write(ANSI_GREEN + trick.upNow() + "'s Turn" + ANSI_RESET);
                     write("Trump: " + round.getTrump().toString());
-                    write("Your bid: " + round.roundInfoMap.get(ohHell.getUpNow()).getBid());
-                    write(ohHell.getUpNow().getPlayerName() + "'s hand:" + ohHell.getUpNow().handToString());
+                    write("Your bid: " + round.roundInfoMap.get(trick.upNow()).getBid());
+                    write(trick.upNow().getPlayerName() + "'s hand:" + trick.upNow().handToString());
                     while (true) {
                         write("Play a card (#): ");
                         String input = scanner.nextLine();
                         try {
-                            trick.playCard(ohHell.getUpNow(), Integer.parseInt(input) - 1);
+                            trick.playCard(Integer.parseInt(input) - 1);
                             break;
                         } catch (Exception e) {
-                            write("Enter a valid card number.");
+                            write(e + "Enter a valid card number."); //TODO: remove e on launch
                         }
                     }
                     wipe();
                     write(trick.playedCardsToString());
-                }
+                }while (trick.trickHasNextToAct());
+                //trick over, should start next round;
             }while (round.hasNextTrick());
             //round over, score tallied
+                round.endTrick(trick);
+                System.out.println(round.wonLast + " took that trick!");
         }while (ohHell.hasNextRound());
-
     }
 
 

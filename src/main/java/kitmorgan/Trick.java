@@ -11,23 +11,30 @@ public class Trick {
 
     private Player winner;
     public List<Player> players = new ArrayList<>();
-    private Card trump;
+    private final Card trump;
     Card.Suits trumpSuit;
     public Map<Card, Player> cardsPlayed = new HashMap<>();
-    private boolean hasTrumpBeenPlayed = false;
-    private Card firstCard;
+    private boolean hasTrumpBeenPlayed;
+
     private int trickNumber = 0;
     private int cardsPlayedCounter = 0;
 
     private Card.Suits firstSuitPlayed;
+    int currentPlayerIndex;
 
-    public Trick(List<Player> players, Card trump, int trickNumber, Boolean hasTrumpBeenPlayed){
+    public Trick(List<Player> players, Card trump, int trickNumber, Boolean hasTrumpBeenPlayed, int upFirst){
         this.players = players;
         this.trump = trump;
         this.hasTrumpBeenPlayed = hasTrumpBeenPlayed;
         trumpSuit = trump.getSuit();
         this.trickNumber = trickNumber;
+        this.currentPlayerIndex = upFirst;
     }
+
+    public Player upNow() {
+        return players.get(currentPlayerIndex);
+    }
+
     //v2 -- is the card legal?
     public boolean canPlayCard(Player player, int cardIndex){
         Card card = player.getHand().get(cardIndex);
@@ -62,7 +69,8 @@ public class Trick {
         return false;
     }
     // check to see if the card is playable using canPlay();
-    public void playCard(Player player, int indexCard){
+    public void playCard(int indexCard){
+        Player player = upNow();
         if(!canPlayCard(player, indexCard)){
             throw new IllegalArgumentException ("card not valid");
         }
@@ -73,10 +81,11 @@ public class Trick {
             firstSuitPlayed = card.getSuit();
         }
         cardsPlayedCounter++;
+        currentPlayerIndex+= 1 % players.size();
     }
 
     public Player getWinner() {
-        Card bestCard = firstCard;
+        Card bestCard = new Card(firstSuitPlayed, Card.Rank.DEUCE);
         // picking strongest suit
         if(trump != null) {
             for (Map.Entry<Card, Player> entry : cardsPlayed.entrySet()) {
@@ -114,5 +123,12 @@ public class Trick {
         }
         return output;
     }
+
+    public boolean trickHasNextToAct(){
+        if(cardsPlayedCounter < players.size()){
+            return true;
+        }return false;
+    }
+
 
 }

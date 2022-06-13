@@ -8,7 +8,7 @@ import java.util.Map;
 public class Round {
     public Map<Player, RoundInfo> roundInfoMap = new HashMap<>();
 
-    private List<Player> players = new ArrayList<>();
+    private List<Player> players;
 
     private final Card trump;
 
@@ -17,8 +17,6 @@ public class Round {
     private final int roundNumber;
 
     public List<Trick> tricks = new ArrayList<>();
-
-    public boolean trumpPlayed;
 
     private boolean overBid = false;
 
@@ -30,10 +28,11 @@ public class Round {
 
     Player dealer;
 
+    Player wonLast;
+
     public int modDealerIndex;
 
     int currentPlayerIndex = 0; //(getUpFirstThisTrickIndex() + 1) % players.size();
-
 
     public Card getTrump() {
         return trump;
@@ -49,10 +48,11 @@ public class Round {
     public Round(List<Player> players, int roundNumber, int modDealerIndex, boolean hasTrump) {
         this.players = players;
         this.hasTrump = hasTrump;
-        this.trump = deal(roundNumber, hasTrump);
+        this.trump = deal(roundNumber);
         this.roundNumber = roundNumber;
         this.dealer = players.get(modDealerIndex);
         this.modDealerIndex = modDealerIndex;
+        this.currentPlayerIndex = (modDealerIndex + 1) % players.size();
         for (Player player : players) {
             RoundInfo roundInfo = new RoundInfo(0, 0);
             roundInfoMap.put(player, roundInfo);
@@ -62,7 +62,7 @@ public class Round {
     /**
      * deals roundNumber of cards to each player, if drawTrump is true it will return a trump card else it will return null
      */
-    public Card deal(int roundNumber, boolean drawTrump) {
+    public Card deal(int roundNumber) {
         Deck deck = new Deck();
         deck.shuffle();
         for (int cardIndex = 0; cardIndex < roundNumber; cardIndex++) {
@@ -70,11 +70,16 @@ public class Round {
                 player.addCard(deck.cards.pop());
             }
         }
-        if (drawTrump) {
+        if (this.hasTrump) {
             return deck.cards.pop();
         } else {
             return null;
         }
+    }
+
+    public Player upNow(){
+        return players.get(currentPlayerIndex);
+
     }
 
     /**
@@ -87,7 +92,6 @@ public class Round {
                 RoundInfo roundInfo = roundInfoMap.get(player);
                 roundInfo.setBid(bid);
                 roundInfoMap.put(player, roundInfo);
-                bidsTaken++;
             } else {
                 return false;
             }
@@ -95,31 +99,32 @@ public class Round {
             RoundInfo roundInfo = roundInfoMap.get(player);
             roundInfo.setBid(bid);
             roundInfoMap.put(player, roundInfo);
-            bidsTaken++;
         } else {
             return false;
         }
+        bidsTaken++;
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
         return true;
+    }
+
+    public boolean hasNextBidder(){
+        if(bidsTaken < players.size()){
+            return true;
+        }return false;
     }
 
     /**
      * gets invalid bid for dealer
      */
     public int getInvalidDealerBid() {
-        int bidSoFar = 0;
-        for (Player player : players) {
-            if (!player.isDealer()) { //TODO: Change like above;
-                bidSoFar += roundInfoMap.get(player).getBid();
-            }
-        }
-        return roundNumber - bidSoFar;
+        return roundNumber - getBidSoFar();
     }
 
 
     public int getBidSoFar() {
         int bidSoFar = 0;
         for (Player player : players) {
-            if (!player.isDealer()) {
+            if (!isDealer(player)) {
                 bidSoFar += roundInfoMap.get(player).getBid();
             }
         }
@@ -175,7 +180,7 @@ public class Round {
     }
 
     public boolean hasNextTrick(){
-        if(tricks.size() < roundNumber - 1){
+        if(trickNumber < roundNumber){
             hasNextTrick = true;
             return true;
         }else{
@@ -184,18 +189,30 @@ public class Round {
         }
     }
 
-
+    public int getFirstPlayerForTrickIndex(){
+        if (trickNumber == 0){
+            return modDealerIndex;
+        }else{
+            for(int i = 0; i < players.size(); i++){
+                if(players.get(i).equals(wonLast)){
+                    return i;
+                }
+            }
+            return -99;
+        }
+    }
     public Trick createTrick() {
-        Trick trick = new Trick(players, getTrump(), trickNumber, hasTrumpBeenPlayed());
+        Trick trick = new Trick(players, getTrump(), trickNumber, hasTrumpBeenPlayed(), getUpFirstThisTrickIndex());
         return trick;
     }
 
     public void endTrick(Trick trick) throws Exception{
         if(trick.cardsPlayed.size() == players.size()){
-            trick.getWinner();
+            wonLast = trick.getWinner();
             addTrick(trick);
+
         }else {
-            throw new Exception("THE TRICK IS NOT OVER UNTIL ALL PLAYERS HAVE PLAYED: " + trick.cardsPlayed.size() + "!=" + players.size());
+            throw new Exception("THE TRICK IS NOT OVER UNTIL ALL PLAYERS HAVE PLAYED: " + trick.cardsPlayed.size() + " != " + players.size());
         }
 
     }
