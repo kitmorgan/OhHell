@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f8111be5-db44-471c-a055-7c3c02ed1978" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHellUserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHellUserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/Round.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/RoundInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/RoundInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/Trick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/Trick.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" afterDir="false" />
@@ -129,5 +131,20 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/kitmorgan/RoundInfo.java</url>
+          <line>36</line>
+          <properties class="kitmorgan.RoundInfo" method="madeBid">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

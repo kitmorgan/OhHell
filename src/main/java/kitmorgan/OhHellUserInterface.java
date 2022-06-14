@@ -53,14 +53,15 @@ public class OhHellUserInterface {
             System.out.printf(round.dealer.getPlayerName() + " is dealing! Press enter to deal...");
             scanner.nextLine();
             write("");
-            write("READ ME: '" + ANSI_RED + round.getTrump().toString() + " is the trump card" + ANSI_RESET + ", lets start bidding.");
+            write("READ ME: '" + ANSI_GREEN + round.getTrump().toString() + " is the trump card" + ANSI_RESET + ", lets start bidding.");
 
             System.out.printf("%s is the first to bid', pass the computer to them.\n", ohHell.players.get((ohHell.dealerIndex + 1) % (ohHell.getNumberOfPlayers() - 1)).playerName);
             write("press enter when ready (hand will be exposed)");
             scanner.nextLine();
             wipe();
-            // works
-            while (round.hasNextBidder()) { // TODO: DO WHILE
+            //
+
+            do { // do while round has fewer bids than players
                 write(ANSI_GREEN + round.upNow().getPlayerName() + "'s Turn" + ANSI_RESET);
                 write("Trump: " + round.getTrump().toString());
                 write("Current bid is at: " + round.getBidSoFar());
@@ -72,7 +73,7 @@ public class OhHellUserInterface {
                         System.out.println("Dealer is up, you can't bid: " + round.getInvalidDealerBid());
                     }
                 }
-                while (true) {
+                while (true) { // loops till bid is set
                     System.out.printf("%s, enter your bid: ", round.upNow().getPlayerName());
                     String bid = scanner.nextLine();
                     try {
@@ -86,7 +87,7 @@ public class OhHellUserInterface {
                         System.out.println("Enter a valid bid!");
                     }
                 }
-            }
+            }while (round.hasNextBidder());
             // bids set, now for the tricks
             wipe();
             write("Bids are set, lets play! Pass the computer to your left....");
@@ -94,11 +95,10 @@ public class OhHellUserInterface {
             // play
 
             //TODO: need to rework the logic and counter
-            do{
-             //just added this 9:57 6/10/22
-                round.createTrick();
-                do {
-                    write(ANSI_GREEN + trick.upNow() + "'s Turn" + ANSI_RESET);
+            do{ // do while round has another trick to play;
+                trick = round.createTrick();
+                do { // do while there are still cards left to play
+                    write(ANSI_GREEN + trick.upNow().getPlayerName() + "'s Turn" + ANSI_RESET);
                     write("Trump: " + round.getTrump().toString());
                     write("Your bid: " + round.roundInfoMap.get(trick.upNow()).getBid());
                     write(trick.upNow().getPlayerName() + "'s hand:" + trick.upNow().handToString());
@@ -113,14 +113,18 @@ public class OhHellUserInterface {
                         }
                     }
                     wipe();
-                    write(trick.playedCardsToString());
+                    write("Cards played: " + trick.playedCardsToString());
                 }while (trick.trickHasNextToAct());
+                round.endTrick(trick);
+                System.out.println(round.wonLast.getPlayerName() + " took that trick! [ENTER TO CONTINUE]");
+                scanner.nextLine();
                 //trick over, should start next round;
             }while (round.hasNextTrick());
             //round over, score tallied
-                round.endTrick(trick);
-                System.out.println(round.wonLast + " took that trick!");
+            ohHell.scoreRound(round.roundInfoMap);
+            printStringScoreBoard(ohHell.scoreboard);
         }while (ohHell.hasNextRound());
+        write(ohHell.gloriousVictor().getPlayerName() + " is the WINNER!!!!! Thanks for playing!");
     }
 
 
@@ -164,5 +168,15 @@ public class OhHellUserInterface {
         }
         answer.append("]");
         return answer.toString();
+    }
+
+    public static void printStringScoreBoard(Map<Player, Integer> scoreBoard) {
+        List<String> scoreList = new ArrayList<>();
+        for (Map.Entry<Player, Integer> entry : scoreBoard.entrySet()) {
+            Player player = entry.getKey();
+            int score = entry.getValue();
+            String output = player.getPlayerName() + " score: " + score;
+            System.out.println(output);
+        }
     }
 }

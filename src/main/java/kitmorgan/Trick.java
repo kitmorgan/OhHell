@@ -14,12 +14,16 @@ public class Trick {
     private final Card trump;
     Card.Suits trumpSuit;
     public Map<Card, Player> cardsPlayed = new HashMap<>();
+
     private boolean hasTrumpBeenPlayed;
 
-    private int trickNumber = 0;
+    private int trickNumber;
+
     private int cardsPlayedCounter = 0;
 
     private Card.Suits firstSuitPlayed;
+
+
     int currentPlayerIndex;
 
     public Trick(List<Player> players, Card trump, int trickNumber, Boolean hasTrumpBeenPlayed, int upFirst){
@@ -32,7 +36,7 @@ public class Trick {
     }
 
     public Player upNow() {
-        return players.get(currentPlayerIndex);
+        return players.get(currentPlayerIndex % players.size());
     }
 
     //v2 -- is the card legal?
@@ -119,7 +123,7 @@ public class Trick {
     public String playedCardsToString(){
         String output = "";
         for(Map.Entry<Card, Player> entry : cardsPlayed.entrySet()){
-            output += entry.getValue().toString();
+            output += entry.getKey().toString() +" ";
         }
         return output;
     }

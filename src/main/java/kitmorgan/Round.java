@@ -22,7 +22,9 @@ public class Round {
 
     private boolean hasNextTrick = true;
 
-    public int trickNumber = tricks.size();
+    public int trickNumber(){
+        return tricks.size();
+    }
 
     public int bidsTaken = 0;
 
@@ -108,9 +110,7 @@ public class Round {
     }
 
     public boolean hasNextBidder(){
-        if(bidsTaken < players.size()){
-            return true;
-        }return false;
+        return (bidsTaken < players.size());
     }
 
     /**
@@ -158,12 +158,12 @@ public class Round {
     public int getUpFirstThisTrickIndex() {
         Player winnerLast = null;
         int answer = -1;
-        if (trickNumber == 0) {
+        if (trickNumber() == 0) {
             int index = (modDealerIndex + 1) % players.size();
             return index;
         }
-        for (int i = 0; i < tricks.size(); i++) {
-            winnerLast = tricks.get(i).getWinner();
+        for (Trick trick : tricks) {
+            winnerLast = trick.getWinner();
         }
         for (int j = 0; j < players.size(); j++) {
             if (winnerLast.equals(players.get(j))) {
@@ -180,7 +180,7 @@ public class Round {
     }
 
     public boolean hasNextTrick(){
-        if(trickNumber < roundNumber){
+        if(trickNumber() < roundNumber){
             hasNextTrick = true;
             return true;
         }else{
@@ -189,21 +189,8 @@ public class Round {
         }
     }
 
-    public int getFirstPlayerForTrickIndex(){
-        if (trickNumber == 0){
-            return modDealerIndex;
-        }else{
-            for(int i = 0; i < players.size(); i++){
-                if(players.get(i).equals(wonLast)){
-                    return i;
-                }
-            }
-            return -99;
-        }
-    }
     public Trick createTrick() {
-        Trick trick = new Trick(players, getTrump(), trickNumber, hasTrumpBeenPlayed(), getUpFirstThisTrickIndex());
-        return trick;
+        return new Trick(players, getTrump(), trickNumber(), hasTrumpBeenPlayed(), getUpFirstThisTrickIndex());
     }
 
     public void endTrick(Trick trick) throws Exception{

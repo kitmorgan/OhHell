@@ -10,7 +10,7 @@ public class OhHell {
     public List<Player> players = new ArrayList<>();
     private final int numberOfPlayers;
     private final int numberOfRounds;
-    Map<Integer, Integer> scoreboard = new HashMap<>();
+    Map<Player, Integer> scoreboard = new HashMap<>();
     public int roundNumber = 1;
     public boolean trumpThisRound = true;
     public int dealerIndex = 0;
@@ -54,7 +54,6 @@ public class OhHell {
         for (int i = 0; i < numberOfPlayers; i++) {
             Player player = new Player("Player" + (i + 1), i);
             players.add(player);
-            scoreboard.put(i, 0);
         }
         players.get(numberOfPlayers - 1).isDealer = true;
     }
@@ -121,11 +120,22 @@ public class OhHell {
     }
 
     public boolean hasNextRound() {
-        if (rounds.size() < numberOfRounds) {
-            return true;
-        } else {
-            return false;
+        return rounds.size() < numberOfRounds;
+    }
+
+    public void scoreRound(Map<Player, RoundInfo> roundInfoMap){
+        for(Map.Entry<Player, RoundInfo> entry : roundInfoMap.entrySet()){
+            Player player = entry.getKey();
+            RoundInfo roundInfo = entry.getValue();
+            if(!scoreboard.containsKey(player)){
+                scoreboard.put(player, 0);
+            }
+            if(roundInfo.madeBid()){
+                int score = scoreboard.get(player);
+                scoreboard.put(player, score + 10);
+            }
         }
+        nextRound();
     }
 
     public void nextRound() {
@@ -136,6 +146,20 @@ public class OhHell {
     public Round createRound() {
         int modDealerIndex = (dealerIndex) % (numberOfPlayers - 1);
         return new Round(players, this.roundNumber, modDealerIndex, trumpThisRound);
+    }
+
+    public Player gloriousVictor(){
+        int highScore = 0;
+        Player winner = null;
+        for(Map.Entry<Player, Integer> entry : scoreboard.entrySet()){
+            Player player = entry.getKey();
+            Integer score = entry.getValue();
+            if (score > highScore){
+                highScore = score;
+                winner = player;
+            }
+        }
+        return winner;
     }
     /** Game order:
      * initialize OhHell
