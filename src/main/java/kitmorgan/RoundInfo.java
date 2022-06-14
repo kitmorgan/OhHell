@@ -33,4 +33,8 @@ public class RoundInfo {
         this.tricks++;
         return this;
     }
+
+    public boolean madeBid(){
+        return  (getBid() == getTricks());
+    }
 }
