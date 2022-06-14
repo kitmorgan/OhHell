@@ -94,7 +94,6 @@ public class OhHellUserInterface {
             scanner.nextLine();
             // play
 
-            //TODO: need to rework the logic and counter
             do{ // do while round has another trick to play;
                 trick = round.createTrick();
                 do { // do while there are still cards left to play
@@ -109,7 +108,7 @@ public class OhHellUserInterface {
                             trick.playCard(Integer.parseInt(input) - 1);
                             break;
                         } catch (Exception e) {
-                            write(e + "Enter a valid card number."); //TODO: remove e on launch
+                            write("Enter a valid card number.");
                         }
                     }
                     wipe();
