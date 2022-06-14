@@ -31,8 +31,9 @@ public class RoundInfo {
         return tricks;
     }
 
-    public void takeTrick(){
+    public RoundInfo takeTrick(){
         this.tricks++;
+        return this;
     }
 
     public boolean madeBid(){
