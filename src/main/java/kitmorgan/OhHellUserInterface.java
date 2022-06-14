@@ -55,7 +55,7 @@ public class OhHellUserInterface {
             write("");
             write("READ ME: '" + ANSI_GREEN + round.getTrump().toString() + " is the trump card" + ANSI_RESET + ", lets start bidding.");
 
-            System.out.printf("%s is the first to bid', pass the computer to them.\n", ohHell.players.get((ohHell.dealerIndex + 1) % (ohHell.getNumberOfPlayers() - 1)).playerName);
+            System.out.printf("%s is the first to bid', pass the computer to them.\n", round.upNow().getPlayerName());
             write("press enter when ready (hand will be exposed)");
             scanner.nextLine();
             wipe();

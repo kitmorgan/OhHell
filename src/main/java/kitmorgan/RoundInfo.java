@@ -18,6 +18,7 @@ public class RoundInfo {
     public void setBid(int bid){
         this.bid = bid;
     }
+
     public void setTricks(int tricks){
         this.tricks = tricks;
     }
@@ -29,9 +30,9 @@ public class RoundInfo {
     public int getTricks() {
         return tricks;
     }
-    public RoundInfo takeTrick(){
+
+    public void takeTrick(){
         this.tricks++;
-        return this;
     }
 
     public boolean madeBid(){
