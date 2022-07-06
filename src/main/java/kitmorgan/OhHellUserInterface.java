@@ -55,7 +55,7 @@ public class OhHellUserInterface {
             write("");
             write("READ ME: '" + ANSI_GREEN + round.getTrump().toString() + " is the trump card" + ANSI_RESET + ", lets start bidding.");
 
-            System.out.printf("%s is the first to bid', pass the computer to them.\n", ohHell.players.get((ohHell.dealerIndex + 1) % (ohHell.getNumberOfPlayers() - 1)).playerName);
+            System.out.printf("%s is the first to bid', pass the computer to them.\n", round.upNow().getPlayerName());
             write("press enter when ready (hand will be exposed)");
             scanner.nextLine();
             wipe();
@@ -94,7 +94,6 @@ public class OhHellUserInterface {
             scanner.nextLine();
             // play
 
-            //TODO: need to rework the logic and counter
             do{ // do while round has another trick to play;
                 trick = round.createTrick();
                 do { // do while there are still cards left to play
@@ -109,7 +108,7 @@ public class OhHellUserInterface {
                             trick.playCard(Integer.parseInt(input) - 1);
                             break;
                         } catch (Exception e) {
-                            write(e + "Enter a valid card number."); //TODO: remove e on launch
+                            write("Enter a valid card number.");
                         }
                     }
                     wipe();

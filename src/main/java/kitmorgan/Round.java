@@ -34,7 +34,7 @@ public class Round {
 
     public int modDealerIndex;
 
-    int currentPlayerIndex = 0; //(getUpFirstThisTrickIndex() + 1) % players.size();
+    int currentPlayerIndex; //(getUpFirstThisTrickIndex() + 1) % players.size();
 
     public Card getTrump() {
         return trump;
@@ -197,6 +197,7 @@ public class Round {
         if(trick.cardsPlayed.size() == players.size()){
             wonLast = trick.getWinner();
             addTrick(trick);
+            roundInfoMap.put((wonLast), roundInfoMap.get(wonLast).takeTrick()); //
 
         }else {
             throw new Exception("THE TRICK IS NOT OVER UNTIL ALL PLAYERS HAVE PLAYED: " + trick.cardsPlayed.size() + " != " + players.size());

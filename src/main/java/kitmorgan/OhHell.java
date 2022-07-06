@@ -144,7 +144,7 @@ public class OhHell {
     }
 
     public Round createRound() {
-        int modDealerIndex = (dealerIndex) % (numberOfPlayers - 1);
+        int modDealerIndex = (dealerIndex) % (numberOfPlayers);
         return new Round(players, this.roundNumber, modDealerIndex, trumpThisRound);
     }
 
