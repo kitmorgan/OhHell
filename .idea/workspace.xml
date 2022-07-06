@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8111be5-db44-471c-a055-7c3c02ed1978" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHellUserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHellUserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/Round.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/Round.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/RoundInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/RoundInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/Trick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/Trick.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/Round.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/Round.class" afterDir="false" />
-    </list>
+    <list default="true" id="f8111be5-db44-471c-a055-7c3c02ed1978" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,9 +28,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../christopher-morgan-student-code/module-1/18_Review_Day" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "D:/workspace/Katas"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="kitmorgan" />
