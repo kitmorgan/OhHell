@@ -167,7 +167,7 @@ public class OhHell {
      * create Round in a for loop where each index is the round number and optional logic for hasTrump;
      * inside is one bidding round where each player bids starting left of dealer, ending on dealer (there is logic in the getBid for if the player is the dealer);
      * the round then continues with the trick playCard for each player roundNumber number of times. (Ex: round 10 there are 10 tricks that need to be created.)
-     * when the round ends, score is tallied based on if
+     * when the round ends, score is tallied
      */
 
 }

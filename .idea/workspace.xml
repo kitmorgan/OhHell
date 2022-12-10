@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8111be5-db44-471c-a055-7c3c02ed1978" name="Changes" comment="" />
+    <list default="true" id="f8111be5-db44-471c-a055-7c3c02ed1978" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/cpu/Play.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kitmorgan/OhHell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/OhHellUserInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/Round.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/Round.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kitmorgan/RoundInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kitmorgan/RoundInfo.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,11 +36,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "D:/workspace/Katas"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;D:/workspace/OhHell&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="kitmorgan" />
@@ -123,20 +131,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/kitmorgan/RoundInfo.java</url>
-          <line>36</line>
-          <properties class="kitmorgan.RoundInfo" method="madeBid">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
