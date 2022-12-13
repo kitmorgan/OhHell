@@ -117,7 +117,7 @@ public class OhHellUserInterface {
                 round.endTrick(trick);
                 System.out.println(round.wonLast.getPlayerName() + " took that trick! [ENTER TO CONTINUE]");
                 scanner.nextLine();
-                //trick over, should start next round;
+                //trick over, should start next trick;
             }while (round.hasNextTrick());
             //round over, score tallied
             ohHell.scoreRound(round.roundInfoMap);
